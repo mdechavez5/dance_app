@@ -33,3 +33,8 @@ h3 {
 p {
     font-size: 12px;
 }
+
+.profile_pic {
+    width: 100px;
+    height: 100px;
+}
