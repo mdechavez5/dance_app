@@ -27,6 +27,18 @@
             <div class="navbar-menu navbar-end">
                 <a class="navbar-item" href="/dancers">Dancers</a>
             </div>
+            {% if user.is_authenticated %}
+                <div class="navbar-menu navbar-end">
+                    <span class="navbar-item">Welcome: {{user.username}}</span>
+                    <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
+                </div>
+            {% else %}
+                <div class="navbar-menu navbar-end">
+                <a class="navbar-item" href="{% url 'login' %}">Log In</a>
+                    <!--   here is our new link      -->
+                <a class="navbar-item" href="{% url 'signup' %}">Sign Up</a>
+                </div>
+            {% endif %}
         </nav>
         <div class="container">
 
