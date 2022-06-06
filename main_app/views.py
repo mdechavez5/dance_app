@@ -1,7 +1,7 @@
 from struct import unpack_from
 from django.shortcuts import render
 from django.views import View
-from .models import Profile
+from .models import Profile, Post
 from django.views.generic.base import TemplateView
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
@@ -13,6 +13,11 @@ from django.utils.decorators import method_decorator
 # Create your views here.
 class Home(TemplateView):
     template_name = "home.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["posts"] = Post.objects.all()
+        # context["posts"] = Post.objects.filter(user=self.request.user)
+        return context
 
 class About(TemplateView):
     template_name = "about.html"
@@ -33,7 +38,7 @@ class Profile(TemplateView):
         context["u_form"] = u_form
         context["p_form"] = p_form
         return context
-        
+
     def post(self, request, *args, **kwargs):
         u_form= UserUpdateForm(self.request.POST, instance=self.request.user)
         p_form = ProfileUpdateForm(self.request.POST, self.request.FILES, instance=self.request.user.profile)
