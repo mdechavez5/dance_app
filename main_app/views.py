@@ -8,3 +8,6 @@ class Home(TemplateView):
 
 class About(TemplateView):
     template_name = "about.html"
+
+class DancerList(TemplateView):
+    template_name = "dancer_list.html"
