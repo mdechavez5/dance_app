@@ -7,4 +7,14 @@
 <p>{{user.profile.location}}</p>
 <!-- <p>{{user.profile.profile_pic}}</p> -->
 <img class="profile_pic" src="{{ user.profile.profile_pic.url }}" alt="{{ user.username }}">
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %} 
+    {{ u_form.as_p }}
+    <p>-------</p>
+    {{ p_form.as_p }}
+    <input type="submit" class="btn" value="Update" />
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+
 {% endblock %}

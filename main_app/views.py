@@ -1,9 +1,10 @@
+from struct import unpack_from
 from django.shortcuts import render
 from django.views import View
 from .models import Profile
 from django.views.generic.base import TemplateView
 from django.contrib.auth.forms import UserCreationForm
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
@@ -21,13 +22,25 @@ class DancerList(TemplateView):
 
 @method_decorator(login_required,name='dispatch')
 class Profile(TemplateView):
-    # u_form = UserUpdateForm()
-    # p_form = ProfileUpdateForm()
     template_name = "profile.html"
+
     def get_context_data(self, **kwargs):
+        u_form = UserUpdateForm(instance=self.request.user)
+        p_form = ProfileUpdateForm(instance=self.request.user.profile)
+
         context = super().get_context_data(**kwargs)
         context["profile"] = Profile
+        context["u_form"] = u_form
+        context["p_form"] = p_form
         return context
+        
+    def post(self, request, *args, **kwargs):
+        u_form= UserUpdateForm(self.request.POST, instance=self.request.user)
+        p_form = ProfileUpdateForm(self.request.POST, self.request.FILES, instance=self.request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            return redirect("profile")
 
 class Signup(View):
     # show a form to fill out
@@ -35,7 +48,7 @@ class Signup(View):
         form = UserRegisterForm()
         context = {"form": form}
         return render(request, "registration/signup.html", context)
-    # on form ssubmit validate the form and login the user.
+    # on form submit validate the form and login the user.
     def post(self, request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
