@@ -26,9 +26,6 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.user.username} Profile"
 
-    class Meta:
-        ordering = ["user"]
-
 # class CustomUser(AbstractUser):
 #     mobile_no = models.IntegerField(blank=True,null=True)
 #     date_of_birth = models.DateField(blank=True,null=True)

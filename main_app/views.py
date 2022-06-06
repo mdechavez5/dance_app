@@ -26,8 +26,18 @@ class DancerList(TemplateView):
     template_name = "dancer_list.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["users"] = User.objects.all()
-        # context["posts"] = Post.objects.filter(user=self.request.user)
+        # context["users"] = User.objects.all()
+        # return context
+        name = self.request.GET.get("username")
+
+        if name != None:
+            # context["dancers"] = Dancer.objects.filter(name=name, user=self.request.user)
+            context["users"] = User.objects.filter(username=name)
+            context["header"] = f"Searching for {name}"
+        else:
+            # context["dancers"] = Dancer.objects.filter(user=self.request.user)
+            context["users"] = User.objects.all()
+            context["header"] = "Dancers"
         return context
 
 @method_decorator(login_required,name='dispatch')
@@ -37,7 +47,6 @@ class Profile(TemplateView):
     def get_context_data(self, **kwargs):
         u_form = UserUpdateForm(instance=self.request.user)
         p_form = ProfileUpdateForm(instance=self.request.user.profile)
-
         context = super().get_context_data(**kwargs)
         context["profile"] = Profile
         context["u_form"] = u_form

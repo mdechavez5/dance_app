@@ -37,5 +37,5 @@ p {
 .profile_pic {
     width: 200px;
     height: 200px;
-    object-fit: contain;
+    object-fit: cover;
 }

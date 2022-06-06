@@ -1,13 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Dancer List</h1>
+<h1 class="title is-3 has-text-success">Dancer List</h1>
+
+    <h1 class="title pt-5">{{header}}</h1>
+
+    <form class="mb-5" method="get">
+        <div class="field has-addons">
+            <div class="control">
+                <!--  Our input will search by name of artist  -->
+                <input class="input" type="text" name="username" placeholder="name" />
+            </div>
+            <div class="control">
+                <input class="button is-success" type="submit" value="Search" />
+            </div>
+        </div>
+        <!--  This anchor tag will redirect back to artist list without a query param -->
+        <a class="button is-dark" href="{% url 'dancer_list' %}">Clear Search</a>
+    </form>
+
 <div class="gallery">
     {% for user in users %}
     <a href="">
         <div class="card">
             <div class="card-image">
                 <figure class="image is-square">
-                    <img src="../media/{{user.profile.profile_pic}}" alt="{{user}}" />
+                    <img class="profile_pic" src="../media/{{user.profile.profile_pic}}" alt="{{user}}" />
                 </figure>
             </div>
             <div class="card-header">
