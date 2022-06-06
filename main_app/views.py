@@ -6,6 +6,8 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegisterForm
 from django.contrib.auth import login
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 class Home(TemplateView):
@@ -17,7 +19,10 @@ class About(TemplateView):
 class DancerList(TemplateView):
     template_name = "dancer_list.html"
 
+@method_decorator(login_required,name='dispatch')
 class Profile(TemplateView):
+    # u_form = UserUpdateForm()
+    # p_form = ProfileUpdateForm()
     template_name = "profile.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
