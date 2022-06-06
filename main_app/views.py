@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.contrib.auth.forms import UserCreationForm
+from .forms import UserRegisterForm
 from django.contrib.auth import login
 from django.shortcuts import redirect
 
@@ -18,12 +19,12 @@ class DancerList(TemplateView):
 class Signup(View):
     # show a form to fill out
     def get(self, request):
-        form = UserCreationForm()
+        form = UserRegisterForm()
         context = {"form": form}
         return render(request, "registration/signup.html", context)
     # on form ssubmit validate the form and login the user.
     def post(self, request):
-        form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
