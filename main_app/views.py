@@ -1,4 +1,3 @@
-from struct import unpack_from
 from django.shortcuts import render
 from django.views import View
 from .models import Profile, Post
@@ -9,6 +8,7 @@ from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib.auth.models import User
 
 # Create your views here.
 class Home(TemplateView):
@@ -24,6 +24,11 @@ class About(TemplateView):
 
 class DancerList(TemplateView):
     template_name = "dancer_list.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["users"] = User.objects.all()
+        # context["posts"] = Post.objects.filter(user=self.request.user)
+        return context
 
 @method_decorator(login_required,name='dispatch')
 class Profile(TemplateView):

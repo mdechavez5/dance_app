@@ -1,4 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Dancer List</h1>
+<div class="gallery">
+    {% for user in users %}
+    <a href="">
+        <div class="card">
+            <div class="card-image">
+                <figure class="image is-square">
+                    <img src="../media/{{user.profile.profile_pic}}" alt="{{user}}" />
+                </figure>
+            </div>
+            <div class="card-header">
+                <p class="card-header-title">{{user}}</p>
+                <p class="card-header-title">{{user.profile.bio}}</p>
+            </div>
+        </div>
+    </a>
+    {% empty %}
+    <article class="message">
+        <div class="message-header">
+            <p>No Profiles Available</p>
+        </div>
+    </article>
+    {% endfor %}
+</div>
 {% endblock %}
