@@ -18,7 +18,7 @@
 
     <div class="gallery">
         {% for user in users %}
-        <a href="">
+        <a href="{% url 'dancer_detail' user.pk %}">
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-square">

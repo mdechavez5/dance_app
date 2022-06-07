@@ -20,7 +20,6 @@ class Home(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["posts"] = Post.objects.all()
-        # ordering = ['-date_posted']
         # context["posts"] = Post.objects.filter(user=self.request.user)
         return context
 
@@ -31,8 +30,6 @@ class DancerList(TemplateView):
     template_name = "dancer_list.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context["users"] = User.objects.all()
-        # return context
         name = self.request.GET.get("username")
 
         if name != None:
@@ -43,6 +40,15 @@ class DancerList(TemplateView):
             # context["dancers"] = Dancer.objects.filter(user=self.request.user)
             context["users"] = User.objects.all()
             context["header"] = "Dancers"
+        return context
+
+class DancerDetail(DetailView):
+    model = User
+    template_name = "dancer_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # context["playlists"] = Playlist.objects.all()
         return context
 
 class PostCreate(View):
@@ -59,7 +65,6 @@ class PostDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context["playlists"] = Playlist.objects.all()
         return context
 
 class PostUpdate(UpdateView):
