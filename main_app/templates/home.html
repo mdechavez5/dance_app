@@ -31,27 +31,35 @@
 
         <div class="gallery">
             {% for post in posts %}
-                <div class="card">
-                    <div class="card-header">
+            <div class="card">
+                <div class="card-header">
+                    <a href="{% url 'post_detail' post.pk %}">
                         <h3 class="card-header-title">{{ post.title }}</h3>
-                    </div>
-                    <div class="card-content">
-                        <p>
-                            <p class="title is-4 has-text-success">{{ post.user}}</p>
-                            {{ post.content }}
-                        </p> 
-                    </div>
-                    <div class="card-footer">
-                        <p class="card-footer-item">{{ post.date_posted }}</p>
-                        <div class="card-footer-item">
-                            <a href="{% url 'post_delete' post.pk %}" class="button is-danger">
-                                <span class="icon">
-                                    <i class="fas fa-trash-alt"></i>
-                                </span>
-                            </a>
-                        </div>
+                    </a>
+                </div>
+                <div class="card-content">
+                    <p>
+                        <p class="title is-4 has-text-success">{{ post.user}}</p>
+                        {{ post.content }}
+                    </p> 
+                </div>
+                <div class="card-footer">
+                    <p class="card-footer-item">{{ post.date_posted }}</p>
+                    <div class="card-footer-item">
+                        <a href="{% url 'post_delete' post.pk %}" class="button is-danger">
+                            <span class="icon">
+                                <i class="fas fa-trash-alt"></i>
+                            </span>
+                        </a>
                     </div>
                 </div>
+            </div>
+            {% empty %}
+            <article class="message">
+                <div class="message-header">
+                    <p>No Dancers Available</p>
+                </div>
+            </article>
             {% endfor %}
         </div>
     </div>

@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views import View
 from .models import Profile, Post
 from django.views.generic.base import TemplateView
+from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
@@ -50,6 +51,15 @@ class PostCreate(View):
         date_posted = datetime.now(timezone.utc)
         Post.objects.create(title=title, content=content, date_posted=date_posted, user=self.request.user)
         return redirect('home')
+
+class PostDetail(DetailView):
+    model = Post
+    template_name = "post_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # context["playlists"] = Playlist.objects.all()
+        return context
 
 class PostDelete(DeleteView):
     model = Post
