@@ -46,6 +46,13 @@
                 <div class="card-footer">
                     <p class="card-footer-item">{{ post.date_posted }}</p>
                     <div class="card-footer-item">
+                        <a href="{% url 'post_update' post.pk %}" class="button is-info">
+                            <span class="icon">
+                                <i class="fas fa-edit"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="card-footer-item">
                         <a href="{% url 'post_delete' post.pk %}" class="button is-danger">
                             <span class="icon">
                                 <i class="fas fa-trash-alt"></i>

@@ -5,6 +5,7 @@ from .models import Profile, Post
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth import login
@@ -60,6 +61,13 @@ class PostDetail(DetailView):
         context = super().get_context_data(**kwargs)
         # context["playlists"] = Playlist.objects.all()
         return context
+
+class PostUpdate(UpdateView):
+    model = Post
+    fields = ['title', 'content']
+    template_name = "post_update.html"
+    def get_success_url(self):
+        return reverse('post_detail', kwargs={'pk': self.object.pk})
 
 class PostDelete(DeleteView):
     model = Post
