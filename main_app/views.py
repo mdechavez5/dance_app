@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from django.shortcuts import render
 from django.views import View
 from .models import Profile, Post
@@ -16,6 +17,7 @@ class Home(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["posts"] = Post.objects.all()
+        # ordering = ['-date_posted']
         # context["posts"] = Post.objects.filter(user=self.request.user)
         return context
 
@@ -39,6 +41,14 @@ class DancerList(TemplateView):
             context["users"] = User.objects.all()
             context["header"] = "Dancers"
         return context
+
+class PostCreate(View):
+    def post(self, request):
+        title = request.POST.get("title")
+        content = request.POST.get("content")
+        date_posted = datetime.now(timezone.utc)
+        Post.objects.create(title=title, content=content, date_posted=date_posted, user=self.request.user)
+        return redirect('home')
 
 @method_decorator(login_required,name='dispatch')
 class Profile(TemplateView):

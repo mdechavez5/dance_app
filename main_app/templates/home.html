@@ -2,6 +2,32 @@
 {% block content %}
 <h class="title is-3 has-text-success">Dancer App Home</h1>
     <div class="container">
+        <form class="mb-5" action="{% url 'post_create' %}" method="post">
+            {% csrf_token %}
+            <div class="field has-addons">
+                <div class="control">
+                    <input
+                        class="input"
+                        type="text"
+                        name="title"
+                        placeholder="Title"
+                        required
+                    />
+                </div>
+                <div class="control">
+                    <input
+                        class="input"
+                        type="text"
+                        name="content"
+                        placeholder="Content"
+                        required
+                    />
+                </div>
+                <div class="control">
+                    <input class="button is-primary" type="submit" value="Create Post" />
+                </div>
+            </div>
+        </form>
         {% for post in posts %}
             <div class="card">
                 <div class="card-header">
