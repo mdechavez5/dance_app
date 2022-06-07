@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views import View
 from .models import Profile, Post
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth import login
@@ -49,6 +50,11 @@ class PostCreate(View):
         date_posted = datetime.now(timezone.utc)
         Post.objects.create(title=title, content=content, date_posted=date_posted, user=self.request.user)
         return redirect('home')
+
+class PostDelete(DeleteView):
+    model = Post
+    template_name = "post_delete.html"
+    success_url = "/"
 
 @method_decorator(login_required,name='dispatch')
 class Profile(TemplateView):
