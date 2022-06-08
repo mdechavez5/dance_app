@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from django.shortcuts import render
 from django.views import View
-from .models import Profile, Post
+from .models import Profile, Post, Piece
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -78,6 +78,28 @@ class PostDelete(DeleteView):
     model = Post
     template_name = "post_delete.html"
     success_url = "/"
+
+class PieceCreate(View):
+
+    def post(self, request, pk):
+        title = request.POST.get("title")
+        vid = request.POST.get("vid")
+        vid_link = request.POST.get("vid_link")
+        user = User.objects.get(pk=pk)
+        Piece.objects.create(title=title, vid=vid, vid_link=vid_link, user=user)
+        return redirect("profile")
+
+class PieceUpdate(UpdateView):
+    model = Piece
+    fields = ['title', 'vid', 'vid_link']
+    template_name = "piece_update.html"
+    def get_success_url(self):
+        return reverse('profile', kwargs={'pk': self.object.pk})
+
+class PieceDelete(DeleteView):
+    model = Piece
+    template_name = "piece_delete.html"
+    success_url = "/profile"
 
 @method_decorator(login_required,name='dispatch')
 class Profile(TemplateView):

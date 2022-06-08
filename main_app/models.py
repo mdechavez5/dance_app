@@ -18,6 +18,14 @@ class Post(models.Model):
     class Meta:
         ordering = ['-date_posted']
 
+class Piece(models.Model):
+    title = models.CharField(max_length=150)
+    vid = models.CharField(max_length=250)
+    vid_link = models.CharField(max_length=300)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="piece")
+
+    def __str__(self):
+        return self.title
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

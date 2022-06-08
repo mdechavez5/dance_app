@@ -8,6 +8,72 @@
 <!-- <p>{{user.profile.profile_pic}}</p> -->
 <img class="profile_pic" src="{{ user.profile.profile_pic.url }}" alt="{{ user.username }}">
 
+<form class="mb-5" action="{% url 'piece_create' user.pk %}" method="post">
+    {% csrf_token %}
+    <div class="field has-addons">
+        <div class="control">
+            <input
+                class="input"
+                type="text"
+                name="title"
+                placeholder="Title"
+                required
+            />
+        </div>
+        <div class="control">
+            <input
+                class="input"
+                type="text"
+                name="vid"
+                placeholder="Youtube Link"
+                required
+            />
+        </div>
+        <div class="control">
+            <input
+                class="input"
+                type="text"
+                name="vid_link"
+                placeholder="Youtube embeded code"
+                required
+            />
+        </div>
+        <div class="control">
+            <input class="button is-primary" type="submit" value="Add Choreo" />
+        </div>
+    </div>
+</form>
+
+<div class="detail__choreos mb-5">
+    <h3 class="title is-3">Performances</h3>
+
+    {% for piece in user.piece.all %}
+        <div class="choreo">
+            <span>{{forloop.counter}}</span>
+            <span><b>{{piece.title}}</b></span>
+            <span><a href="{{piece.vid}}" target="_blank">Link</a></span>
+            <div class="{% url 'piece_update' piece.pk %}">
+                <a href="" class="button is-info">
+                    <span class="icon">
+                        <i class="fas fa-edit"></i>
+                    </span>
+                </a>
+                <a href="{% url 'piece_delete' piece.pk %}" class="button is-danger">
+                    <span class="icon">
+                        <i class="fas fa-trash-alt"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+    {% empty %}
+        <article class="message">
+            <div class="message-header">
+                <p>No Vids Available</p>
+            </div>
+        </article>
+    {% endfor %}
+</div>
+
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %} 
     {{ u_form.as_p }}

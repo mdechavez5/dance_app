@@ -39,3 +39,22 @@ p {
     height: 200px;
     object-fit: cover;
 }
+
+.detail__choreos {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.choreo {
+    width: 100%;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 0.1fr 3fr 0.5fr 0.3fr;
+    border-radius: 5px;
+}
+
+.choreo:hover {
+    background-color: hsla(0, 0%, 100%, 0.1);
+    cursor: pointer;
+}
