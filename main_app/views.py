@@ -48,7 +48,8 @@ class DancerDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context["playlists"] = Playlist.objects.all()
+        context["posts"] = Post.objects.filter(user=self.kwargs["pk"])
+        # context["posts"] = Post.objects.all().filter(user=self.object)
         return context
 
 class PostCreate(View):
