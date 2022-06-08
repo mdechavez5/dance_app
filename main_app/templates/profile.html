@@ -52,8 +52,8 @@
             <span>{{forloop.counter}}</span>
             <span><b>{{piece.title}}</b></span>
             <span><a href="{{piece.vid}}" target="_blank">Link</a></span>
-            <div class="{% url 'piece_update' piece.pk %}">
-                <a href="" class="button is-info">
+            <div class="">
+                <a href="{% url 'piece_update' piece.pk %}" class="button is-info">
                     <span class="icon">
                         <i class="fas fa-edit"></i>
                     </span>

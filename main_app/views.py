@@ -94,7 +94,7 @@ class PieceUpdate(UpdateView):
     fields = ['title', 'vid', 'vid_link']
     template_name = "piece_update.html"
     def get_success_url(self):
-        return reverse('profile', kwargs={'pk': self.object.pk})
+        return reverse('profile')
 
 class PieceDelete(DeleteView):
     model = Piece
