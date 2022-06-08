@@ -110,6 +110,7 @@ class Profile(TemplateView):
         u_form = UserUpdateForm(instance=self.request.user)
         p_form = ProfileUpdateForm(instance=self.request.user.profile)
         context = super().get_context_data(**kwargs)
+        context["posts"] = Post.objects.filter(user=self.request.user)
         context["profile"] = Profile
         context["u_form"] = u_form
         context["p_form"] = p_form

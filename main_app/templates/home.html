@@ -35,7 +35,7 @@
                 <div class="card-header">
                     <div class="media">
                         <div>
-                            <figure class="image is-24x24">
+                            <figure class="image is-32x32">
                                 <img src="media/{{post.user.profile.profile_pic}}" alt="">
                             </figure>
                         </div>
@@ -51,21 +51,7 @@
                     </a>
                 </div>
                 <div class="card-footer">
-                    <div class="card-footer-item">
-                        <a href="{% url 'post_update' post.pk %}" class="button is-info">
-                            <span class="icon">
-                                <i class="fas fa-edit"></i>
-                            </span>
-                        </a>
-                    </div>
                     <p class="card-footer-item">{{ post.date_posted }}</p>
-                    <div class="card-footer-item">
-                        <a href="{% url 'post_delete' post.pk %}" class="button is-danger">
-                            <span class="icon">
-                                <i class="fas fa-trash-alt"></i>
-                            </span>
-                        </a>
-                    </div>
                 </div>
             </div>
             {% empty %}

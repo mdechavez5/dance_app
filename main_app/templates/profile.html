@@ -83,4 +83,52 @@
     <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
+<div class="gallery">
+    {% for post in posts %}
+    <div class="card">
+        <div class="card-header">
+            <div class="media">
+                <div>
+                    <figure class="image is-24x24">
+                        <img src="../../media/{{post.user.profile.profile_pic}}" alt="">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <h3 class="title is-4 has-text-success">{{ post.user}}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <a href="{% url 'post_detail' post.pk %}">
+                <h3 class="card-header-title">{{ post.title }}</h3>
+                <p>{{ post.content }}</p> 
+            </a>
+        </div>
+        <div class="card-footer">
+            <div class="card-footer-item">
+                <a href="{% url 'post_update' post.pk %}" class="button is-info">
+                    <span class="icon">
+                        <i class="fas fa-edit"></i>
+                    </span>
+                </a>
+            </div>
+            <p class="card-footer-item">{{ post.date_posted }}</p>
+            <div class="card-footer-item">
+                <a href="{% url 'post_delete' post.pk %}" class="button is-danger">
+                    <span class="icon">
+                        <i class="fas fa-trash-alt"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <article class="message">
+        <div class="message-header">
+            <p>No Posts Available</p>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+
 {% endblock %}
