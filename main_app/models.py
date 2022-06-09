@@ -16,6 +16,16 @@ class Post(models.Model):
     class Meta:
         ordering = ['-date_posted']
 
+class Comment(models.Model):
+    title = models.CharField(max_length=150)
+    content = models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comment")
+
+    def __str__(self):
+        return self.title
+
 class Piece(models.Model):
     title = models.CharField(max_length=150)
     vid = models.CharField(max_length=250)
