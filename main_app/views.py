@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from django.shortcuts import render
 from django.views import View
-from .models import Profile, Post, Piece
+from .models import Profile, Post, Piece, Team
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -105,6 +105,42 @@ class PieceDelete(DeleteView):
     model = Piece
     template_name = "piece_delete.html"
     success_url = "/profile"
+
+class TeamList(TemplateView):
+    template_name = "team_list.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        name = self.request.GET.get("teamname")
+
+        if name != None:
+            context["teams"] = Team.objects.filter(name=name)
+            context["header"] = f"Searching for {name}"
+        else:
+            context["teams"] = Team.objects.all()
+            context["header"] = "Teams"
+        return context
+
+class TeamDetail(DetailView):
+    model = Team
+    template_name = "team_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # context["posts"] = Post.objects.filter(user=self.kwargs["pk"])
+        # context["posts"] = Post.objects.all().filter(user=self.object)
+        return context
+
+class TeamUpdate(UpdateView):
+    model = Team
+    fields = ['name', 'about']
+    template_name = "team_update.html"
+    def get_success_url(self):
+        return reverse('team_detail', kwargs={'pk': self.object.pk})
+
+class TeamDelete(DeleteView):
+    model = Team
+    template_name = "team_delete.html"
+    success_url = "/teams"
 
 @method_decorator(login_required,name='dispatch')
 class Profile(TemplateView):

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 class="title pt-5">{{header}}</h1>
+
+    <form class="mb-5" method="get">
+        <div class="field has-addons">
+            <div class="control">
+                <input class="input" type="text" name="teamname" placeholder="name" />
+            </div>
+            <div class="control">
+                <input class="button is-success" type="submit" value="Search" />
+            </div>
+        </div>
+        <!--  This anchor tag will redirect back to artist list without a query param -->
+        <a class="button is-dark" href="{% url 'team_list' %}">Clear Search</a>
+    </form>
+
+    <div class="gallery">
+    {% for team in teams %}
+    <a href="{% url 'team_detail' team.pk %}">
+        <div class="card">
+            <div class="card-image">
+                <figure class="image is-square">
+                    <img class="profile_pic" src="{{team.image}}" alt="{{team.name}}" />
+                </figure>
+            </div>
+            <div class="card-header">
+                <p class="card-header-title">{{team.name}}</p>
+            </div>
+        </div>
+    </a>
+    {% empty %}
+    <article class="message">
+        <div class="message-header">
+            <p>No Teams Available</p>
+        </div>
+    </article>
+    {% endfor %}
+    </div>
+{% endblock %}

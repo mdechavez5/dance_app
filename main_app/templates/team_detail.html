@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} {{team.name}} {% endblock %}
+{% block content %}
+    <div class="profile_pic">
+        <img src="{{team.image}}" alt="{{team.title}}" />
+    </div>
+    <div class="detail__name">
+        <h1 class="title">{{team.title}}</h1>
+    </div>
+    <div class="detail__container">
+
+        <p>{{team.name}}</p>
+        <p>{{team.about}}</p>
+
+        <h3 class="title is-3">Members</h3>
+        <div class="gallery">
+            {% for user in team.users.all %}
+    
+                <a href="{% url 'dancer_detail' user.pk %}">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-square">
+                                <img src="../../media/{{user.profile.profile_pic}}" alt="{{user}}" />
+                            </figure>
+                        </div>
+                        <div class="card-header">
+                            <p class="card-header-title">{{user}}</p>
+                        </div>
+                    </div>
+                </a>
+                {% empty %}
+                <article class="message">
+                    <div class="message-header">
+                        <p>No Members Available</p>
+                    </div>
+                </article>
+                {% endfor %}
+        </div>
+    </div>
+{% endblock %}
