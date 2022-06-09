@@ -80,6 +80,10 @@ class PostDelete(DeleteView):
     template_name = "post_delete.html"
     success_url = "/"
 
+class PieceDetail(TemplateView):
+    model = Piece
+    template_name = "piece_detail.html"
+
 class PieceCreate(View):
 
     def post(self, request, pk):
