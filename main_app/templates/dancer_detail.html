@@ -25,38 +25,40 @@
     {% endfor %}
 </div>
 
-    <div class="gallery">
-        {% for post in posts %}
-        <div class="card">
-            <div class="card-header">
-                <div class="media">
-                    <div>
-                        <figure class="image is-24x24">
-                            <img src="../../media/{{post.user.profile.profile_pic}}" alt="">
-                        </figure>
-                    </div>
-                    <div class="media-content">
-                        <h3 class="title is-4 has-text-success">{{ post.user}}</h3>
-                    </div>
+<div class="gallery">
+    {% for post in posts %}
+    <div class="card">
+        <div class="card-header">
+            <div class="media card-header-title">
+                <div class="media-left">
+                    <figure class="image is-square is-32x32">
+                        <img class="profile_pic is-centered is-rounded" src="../../media/{{post.user.profile.profile_pic}}" alt="">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <a href="/dancers/{{post.user.id}}">
+                        <h3 class="title is-3 has-text-success">{{ post.user}}</h3>
+                    </a>
                 </div>
             </div>
-            <div class="card-content">
-                <a href="{% url 'post_detail' post.pk %}">
-                    <h3 class="card-header-title">{{ post.title }}</h3>
-                    <p>{{ post.content }}</p> 
-                </a>
-            </div>
-            <div class="card-footer">
-                <p class="card-footer-item">{{ post.date_posted }}</p>
-            </div>
         </div>
-        {% empty %}
-        <article class="message">
-            <div class="message-header">
-                <p>No Posts Available</p>
-            </div>
-        </article>
-        {% endfor %}
+        <div class="card-content">
+            <a href="{% url 'post_detail' post.pk %}">
+                <h2 class="has-text-black">{{ post.title }}</h2>
+                <p class="has-text-dark">{{ post.content }}</p> 
+            </a>
+        </div>
+        <div class="card-footer">
+            <p class="card-footer-item">{{ post.date_posted }}</p>
+        </div>
     </div>
+    {% empty %}
+    <article class="message">
+        <div class="message-header">
+            <p>No Posts Available</p>
+        </div>
+    </article>
+    {% endfor %}
+</div>
 
 {% endblock %}

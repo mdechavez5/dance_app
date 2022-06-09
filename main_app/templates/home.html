@@ -44,7 +44,7 @@
             {% for post in posts %}
             <div class="card">
                 <div class="card-header">
-                    <div class="media">
+                    <div class="media card-header-title">
                         <div class="media-left">
                             <figure class="image is-square is-32x32">
                                 <img class="profile_pic is-centered is-rounded" src="media/{{post.user.profile.profile_pic}}" alt="">
@@ -59,8 +59,8 @@
                 </div>
                 <div class="card-content">
                     <a href="{% url 'post_detail' post.pk %}">
-                        <h3 class="card-header-title">{{ post.title }}</h3>
-                        <p>{{ post.content }}</p> 
+                        <h2 class="has-text-black">{{ post.title }}</h2>
+                        <p class="has-text-dark">{{ post.content }}</p> 
                     </a>
                 </div>
                 <div class="card-footer">
@@ -70,7 +70,7 @@
             {% empty %}
             <article class="message">
                 <div class="message-header">
-                    <p>No Dancers Available</p>
+                    <p>No Posts Available</p>
                 </div>
             </article>
             {% endfor %}
