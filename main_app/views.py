@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from django.shortcuts import render
 from django.views import View
-from .models import Profile, Post, Piece, Team
+from .models import Profile, Post, Piece, Team, Comment
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -66,6 +66,7 @@ class PostDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["comments"] = Comment.objects.filter(post=self.kwargs["pk"])
         return context
 
 class PostUpdate(UpdateView):

@@ -4,5 +4,39 @@
 <p>{{post.content}}</p>
 <p>{{post.user}}</p>
 <p>{{post.date_posted}}</p>
+
+<div class="gallery">
+    {% for comment in comments %}
+    <div class="card">
+        <div class="card-header">
+            <div class="media">
+                <div>
+                    <figure class="image is-24x24">
+                        <img src="../../media/{{comment.user.profile.profile_pic}}" alt="">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <h3 class="title is-4 has-text-success">{{ comment.user}}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <a href="">
+                <h3 class="card-header-title">{{ comment.title }}</h3>
+                <p>{{ comment.content }}</p> 
+            </a>
+        </div>
+        <div class="card-footer">
+            <p class="card-footer-item">{{ comment.date_posted }}</p>
+        </div>
+    </div>
+    {% empty %}
+    <article class="message">
+        <div class="message-header">
+            <p>No Comments Available</p>
+        </div>
+    </article>
+    {% endfor %}
+</div>
     
 {% endblock %}
