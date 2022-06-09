@@ -81,6 +81,15 @@ class PostDelete(DeleteView):
     template_name = "post_delete.html"
     success_url = "/"
 
+class CommentCreate(View):
+    def post(self, request, pk):
+        title = request.POST.get("title")
+        content = request.POST.get("content")
+        date_posted = datetime.now(timezone.utc)
+        post = Post.objects.get(pk=pk)
+        Comment.objects.create(title=title, content=content, date_posted=date_posted, post=post, user=self.request.user)
+        return redirect('post_detail', pk=pk)
+
 class PieceDetail(TemplateView):
     model = Piece
     template_name = "piece_detail.html"

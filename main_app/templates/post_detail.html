@@ -5,6 +5,33 @@
 <p>{{post.user}}</p>
 <p>{{post.date_posted}}</p>
 
+<form class="mb-5" action="{% url 'comment_create' post.pk %}" method="post">
+    {% csrf_token %}
+    <div class="field has-addons">
+        <div class="control">
+            <input
+                class="input"
+                type="text"
+                name="title"
+                placeholder="Title"
+                required
+            />
+        </div>
+        <div class="control">
+            <input
+                class="input"
+                type="text"
+                name="content"
+                placeholder="comment"
+                required
+            />
+        </div>
+        <div class="control">
+            <input class="button is-primary" type="submit" value="Add Comment" />
+        </div>
+    </div>
+</form>
+
 <div class="gallery">
     {% for comment in comments %}
     <div class="card">
