@@ -5,6 +5,7 @@
 <p>{{post.user}}</p>
 <p>{{post.date_posted}}</p>
 
+{% if user.is_authenticated %}
 <form class="mb-5" action="{% url 'comment_create' post.pk %}" method="post">
     {% csrf_token %}
     <div class="field has-addons">
@@ -31,6 +32,15 @@
         </div>
     </div>
 </form>
+{% else %}
+    <article class="message">
+        <a href="{% url 'login' %}">
+            <div class="message-header">
+                <p>Sign in to create a comment</p>
+            </div>
+        </a>
+    </article>
+{% endif %}
 
 <div class="gallery">
     {% for comment in comments %}
@@ -48,10 +58,8 @@
             </div>
         </div>
         <div class="card-content">
-            <a href="">
                 <h3 class="card-header-title">{{ comment.title }}</h3>
-                <p>{{ comment.content }}</p> 
-            </a>
+                <p>{{ comment.content }}</p>
         </div>
         <div class="card-footer">
             <p class="card-footer-item">{{ comment.date_posted }}</p>

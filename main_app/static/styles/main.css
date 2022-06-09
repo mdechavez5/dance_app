@@ -58,3 +58,8 @@ p {
     background-color: hsla(0, 0%, 100%, 0.1);
     cursor: pointer;
 }
+
+.is-centered{
+    justify-self: center;
+    align-self: center;
+}
