@@ -1,70 +1,59 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1 class="title is-3 has-text-success">{{post.title}}</h1>
-<p>{{post.content}}</p>
-<p>{{post.user}}</p>
-<p>{{post.date_posted}}</p>
 
-{% if user.is_authenticated %}
-<form class="mb-5" action="{% url 'comment_create' post.pk %}" method="post">
-    {% csrf_token %}
-    <div class="field has-addons">
-        <div class="control">
-            <input
-                class="input"
-                type="text"
-                name="title"
-                placeholder="Title"
-                required
-            />
-        </div>
-        <div class="control">
-            <input
-                class="input"
-                type="text"
-                name="content"
-                placeholder="comment"
-                required
-            />
-        </div>
-        <div class="control">
-            <input class="button is-primary" type="submit" value="Add Comment" />
+<div class="card">
+    <div class="card-header">
+        <div class="media card-header-title">
+            <div class="media-left">
+                <figure class="image is-square is-32x32">
+                    <img class="profile_pic is-centered is-rounded" src="../../media/{{post.user.profile.profile_pic}}" alt="">
+                </figure>
+            </div>
+            <div class="media-content">
+                <a href="/dancers/{{post.user.id}}">
+                    <h3 class="title is-3 has-text-success">{{ post.user}}</h3>
+                </a>
+            </div>
         </div>
     </div>
-</form>
-{% else %}
-    <article class="message">
-        <a href="{% url 'login' %}">
-            <div class="message-header">
-                <p>Sign in to create a comment</p>
-            </div>
+    <div class="card-content">
+        <a href="{% url 'post_detail' post.pk %}">
+            <h2 class="has-text-black">{{ post.title }}</h2>
+            <p class="has-text-dark">{{ post.content }}</p> 
         </a>
-    </article>
-{% endif %}
+    </div>
+    <div class="card-footer">
+        <p class="card-footer-item">{{ post.date_posted }}</p>
+    </div>
+</div>
 
-<div class="gallery">
+<div class="container is-fluid">
     {% for comment in comments %}
-    <div class="card">
-        <div class="card-header">
-            <div class="media">
-                <div>
-                    <figure class="image is-24x24">
-                        <img src="../../media/{{comment.user.profile.profile_pic}}" alt="">
-                    </figure>
-                </div>
-                <div class="media-content">
-                    <h3 class="title is-4 has-text-success">{{ comment.user}}</h3>
-                </div>
+    <article class="media">
+        <figure class="media-left">
+            <p class="image is-square is-32x32 level-item">
+                <img class="profile_pic is-centered is-rounded" src="../../media/{{comment.user.profile.profile_pic}}" alt="">
+            </p>
+        </figure>
+        <div class="media-content">
+            <div class="content">
+                <p class="subtitle is-5">
+                    <div class="level">
+                        <div class="level-left">
+                            <strong>{{ comment.user}}</strong>
+                        </div>
+                        <div class="level-right">
+                            <small>{{ comment.date_posted }}</small>
+                        </div>
+                    </div>
+                    
+                    {{ comment.title }}
+                    <br>
+                    {{ comment.content }}
+                </p>
             </div>
         </div>
-        <div class="card-content">
-                <h3 class="card-header-title">{{ comment.title }}</h3>
-                <p>{{ comment.content }}</p>
-        </div>
-        <div class="card-footer">
-            <p class="card-footer-item">{{ comment.date_posted }}</p>
-        </div>
-    </div>
+    </article>
     {% empty %}
     <article class="message">
         <div class="message-header">
@@ -72,6 +61,50 @@
         </div>
     </article>
     {% endfor %}
+
+    <br>
+    {% if user.is_authenticated %}
+        <form class="mb-5" action="{% url 'comment_create' post.pk %}" method="post">
+            {% csrf_token %}
+            <article class="media">
+                <figure class="media-left">
+                    <p class="image is-square is-64x64">
+                        <img class="profile_pic is-centered is-rounded" src="../../media/{{user.profile.profile_pic}}">
+                    </p>
+                </figure>
+                <div class="media-content">
+                    <div class="field">
+                        <p class="control">
+                            <input class="input" type="text" name="title" placeholder="Title of comment">
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control">
+                        <textarea class="textarea" name="content" placeholder="Add a comment..."></textarea>
+                        </p>
+                    </div>
+                    <nav class="level">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <div class="control">
+                                    <input class="button is-primary" type="submit" value="Add Comment" />
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </article>
+        </form>
+    {% else %}
+        <article class="message">
+            <a href="{% url 'login' %}">
+                <div class="message-header">
+                    <p>Sign in to create a comment</p>
+                </div>
+            </a>
+        </article>
+    {% endif %}
+    
 </div>
     
 {% endblock %}
