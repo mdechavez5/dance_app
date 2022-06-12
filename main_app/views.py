@@ -4,9 +4,8 @@ from django.views import View
 from .models import Profile, Post, Piece, Team, Comment
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import UpdateView, DeleteView
 from django.urls import reverse
-from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth import login
 from django.shortcuts import redirect
@@ -20,7 +19,6 @@ class Home(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["posts"] = Post.objects.all()
-        # context["posts"] = Post.objects.filter(user=self.request.user)
         return context
 
 class About(TemplateView):
@@ -33,11 +31,9 @@ class DancerList(TemplateView):
         name = self.request.GET.get("username")
 
         if name != None:
-            # context["dancers"] = Dancer.objects.filter(name=name, user=self.request.user)
             context["users"] = User.objects.filter(username=name)
             context["header"] = f"Searching for {name}"
         else:
-            # context["dancers"] = Dancer.objects.filter(user=self.request.user)
             context["users"] = User.objects.all()
             context["header"] = "Dancers"
         return context
@@ -136,8 +132,6 @@ class TeamDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context["posts"] = Post.objects.filter(user=self.kwargs["pk"])
-        # context["posts"] = Post.objects.all().filter(user=self.object)
         return context
 
 class TeamUpdate(UpdateView):
