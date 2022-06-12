@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
 {% block title %} {{team.name}} {% endblock %}
 {% block content %}
-    <div class="profile_pic">
-        <img src="{{team.image}}" alt="{{team.title}}" />
-    </div>
-    <div class="detail__name">
-        <h1 class="title">{{team.title}}</h1>
+    <h1 class="title pt-5 has-text-success">{{team.name}}</h1>
+    <div class="media">
+        <div class="media-left">
+            <img class="profile_pic" src="{{team.image}}" alt="{{team.name}}" />
+        </div>
+        <div class="media-content">
+            <p>{{team.about}}</p>
+        </div>
     </div>
     <div class="detail__container">
-
-        <p>{{team.name}}</p>
-        <p>{{team.about}}</p>
-
         <h3 class="title is-3">Members</h3>
         <div class="gallery">
             {% for user in team.users.all %}
