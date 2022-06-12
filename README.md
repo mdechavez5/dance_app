@@ -3,6 +3,9 @@ Been to a dance competition/event? Want to know which teams performed? Want to s
 Are you a dancer? Come create your own profile to share more about yourself and showcase pieces you've choreographed or been a part of.
 Team/Company director? Come create a profile for your team. Share more about the team and showcase the team's performances.
 
+## Deployed App
+[Dancer-Connect](https://dancer-connect.herokuapp.com/)
+
 ## Project Description
 Application that provides information about a dance community. This application will display dancer and team information.
 Will use Django Framework for Front-End & Back-End.
@@ -10,6 +13,14 @@ Will use Django Framework for Front-End & Back-End.
 ## Technologies Used
 HTML, CSS, Javascript
 Python, Django, Postresql
+
+## Installation
+Contributor Usage:
+- Fork & Clone Repository
+- Create Development Branch
+- Submit Issue or Pull Request
+  - If you identify bugs, submit an issue on the Git repo. Please detail the bug in your issue.
+  - If you know how to fix it, feel free to note the methods you would use. You could also submit a pull request with suggested code to fix it.
 
 ## Scope
 ### MVP Scope
