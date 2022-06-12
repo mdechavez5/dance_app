@@ -1,12 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>{{user.username}}</h1>
-<p>{{user.first_name}}</p>
-<p>{{user.last_name}}</p>
-<p>{{user.profile.bio}}</p>
-<p>{{user.profile.location}}</p>
-<img class="profile_pic" src="{{ user.profile.profile_pic.url }}" alt="{{ user.username }}">
 
+
+<h1 class="title pt-5 has-text-success">{{user.username}}</h1>
+<div class="media">
+    <div class="media-left">
+        <img class="profile_pic" src="{{ user.profile.profile_pic.url }}" alt="{{ user.username }}">
+    </div>
+    <div class="media-content">
+        <p>
+            <strong class="title pt-3">{{user.first_name}} {{user.last_name}}</strong>
+        </p>
+        <p>{{user.profile.location}}</p>
+        <p>{{user.profile.bio}}</p>
+    </div>
+</div>
+
+
+<br>
 <div class="detail__choreos mb-5">
     <h3 class="title is-3">Performances</h3>
 
@@ -25,6 +36,7 @@
     {% endfor %}
 </div>
 
+<h3 class="title is-3">Posts</h3>
 <div class="gallery">
     {% for post in posts %}
     <div class="card">
