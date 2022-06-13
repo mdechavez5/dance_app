@@ -169,12 +169,10 @@ class Profile(TemplateView):
             return redirect("profile")
 
 class Signup(View):
-    # show a form to fill out
     def get(self, request):
         form = UserRegisterForm()
         context = {"form": form}
         return render(request, "registration/signup.html", context)
-    # on form submit validate the form and login the user.
     def post(self, request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
