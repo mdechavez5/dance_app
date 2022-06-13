@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}Delete {{piece.title}}?{% block content %}
 <h1 class="title pt-5">Are you sure you want to Delete {{piece.title}}?</h1>
 <form method="post">
     {% csrf_token %}
