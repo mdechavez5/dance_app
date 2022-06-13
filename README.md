@@ -73,6 +73,10 @@ As a user, I want to comment on pieces posted by other dancers.
 
 ## Wireframes
 ![Screen Shot 2022-06-03 at 4 35 17 PM](https://user-images.githubusercontent.com/101363667/171948451-f53dd9ec-d372-46bc-944e-36b78d83542a.png)
+![Screen Shot 2022-06-13 at 3 00 31 PM](https://user-images.githubusercontent.com/101363667/173425774-fb30522a-4fa7-4f72-9ed1-391afc020981.png)
+![Screen Shot 2022-06-13 at 3 00 49 PM](https://user-images.githubusercontent.com/101363667/173425801-64306314-c905-45f9-ac3d-0ffbc78336e1.png)
+![Screen Shot 2022-06-13 at 3 01 13 PM](https://user-images.githubusercontent.com/101363667/173425837-0780dd42-2574-44d6-a95c-b415548d8099.png)
+![Screen Shot 2022-06-13 at 3 01 32 PM](https://user-images.githubusercontent.com/101363667/173425843-f49b15d5-e544-48cf-9196-d850adc97339.png)
 
 
 ## Data Models
