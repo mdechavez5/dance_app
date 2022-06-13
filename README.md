@@ -1,4 +1,4 @@
-# Project 3 - Dancer App
+# Project 4 - Dancer App
 Been to a dance competition/event? Want to know which teams performed? Want to see who's on that team? Want to see more of their dancing?
 Are you a dancer? Come create your own profile to share more about yourself and showcase pieces you've choreographed or been a part of.
 Team/Company director? Come create a profile for your team. Share more about the team and showcase the team's performances.
