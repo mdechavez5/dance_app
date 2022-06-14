@@ -80,4 +80,5 @@ As a user, I want to comment on pieces posted by other dancers.
 
 
 ## Data Models
-![Screen Shot 2022-06-03 at 3 11 49 PM](https://user-images.githubusercontent.com/101363667/171938835-6b76c602-35bc-494a-baf6-3d815138760d.png)
+<img width="595" alt="Screen Shot 2022-06-14 at 1 51 38 PM" src="https://user-images.githubusercontent.com/101363667/173656490-921dc334-7ca4-4653-b02e-f74f15653635.png">
+
